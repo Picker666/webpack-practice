@@ -6,7 +6,7 @@ const webpack = require("webpack");
 const ESLintWebpackPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: ["./src/index.js", "./src/index.html"],
   output: {
     filename: "built.js",
     path: resolve(__dirname, "build"),
@@ -14,6 +14,7 @@ module.exports = {
   module: {
     rules: [
       {
+        // 将MiniCssExtractPlugin.loader css插入到html
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
         exclude: /node_modules/,
@@ -21,10 +22,10 @@ module.exports = {
       {
         /**
          * js的兼容问题
-         * babel-loader-使用 Babel 和 webpack 传输文件。
-            @babel/core-将ES2015+ 转换为向后兼容的 JavaScript
-            @babel/preset-env-Babel 的智能默认设置
-            @babel/plugin-proposal-class-properties-自定义 Babel 配置的示例（直接在类上使用属性）
+         * babel-loader 使用 Babel 和 webpack 传输文件。
+            @babel/core 将ES2015+ 转换为向后兼容的 JavaScript
+            @babel/preset-env Babel 的智能默认设置
+            @babel/plugin-proposal-class-properties 自定义 Babel 配置的示例（直接在类上使用属性）
 
             项目的根目录中创建一个.babelrc文件。可以使用preset-env和plugin-proposal-class-properties添加更多默认值。
 
@@ -45,10 +46,16 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.html$/,
+        loader: "html-loader",
+        exclude: /node_modules/,
+      },
     ],
   },
   resolve: {
     alias: {
+      // eslint规则配置
       // # ！！！！！！注意如果配置了此处 要安装 eslint-import-resolver-webpack的插件！！！！！！！！ #
       // 在package.json 配置eslinConfig 或者添加.eslintrc文件
       "@": resolve(__dirname, "src"),
@@ -59,10 +66,11 @@ module.exports = {
       template: "./src/index.html",
     }),
     new MiniCssExtractPlugin({
+      // css代码打包到一个文件中
       filename: "./css/index.css",
     }),
-    new OptimizeCssAssetsWebpackPlugin(),
-    () => ["postcss-preset-env", {}],
+    new OptimizeCssAssetsWebpackPlugin(), // css压缩
+    // () => ["postcss-preset-env", {}],
     new webpack.HotModuleReplacementPlugin({
       // Options...
     }),

@@ -43,13 +43,15 @@
   "browserslist": {
     "development": [
       "last 1 chrome version",
-      "last 1 firfox version",
-      "last 1 safari version"
+      "last 1 firefox version",
+      "last 1 safari version",
+      "last 3 ie version"
     ],
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie 11"
     ]
   },
   "eslintConfig": {

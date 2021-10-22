@@ -1,0 +1,10 @@
+#box1 {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  display: flex;
+  backface-visibility: hidden;
+  background-image: url("./officeBuilding.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}

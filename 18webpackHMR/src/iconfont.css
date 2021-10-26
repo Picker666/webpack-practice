@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1633922457144') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ico05:before {
+  content: "\e608";
+}
+
+.icon-ico07:before {
+  content: "\e609";
+}
+
+.icon-ico08:before {
+  content: "\e60a";
+}
+
+.icon-gouwuche_yongjin:before {
+  content: "\e60d";
+}
+

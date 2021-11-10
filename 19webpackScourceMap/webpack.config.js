@@ -83,4 +83,56 @@ module.exports = {
   },
   mode: "development",
   target: "web",
+  devtool: 'source-map'
 };
+
+/**
+ * source-map: 一种提供源代码构建后代码映射的技术（如果构建后代码运行报错，通过映射可以跟踪错误代码）
+ *  [inline-|hidden- | eval-][nosources-][cheap-[module-]]source-map
+ *
+ * source-map： 外部
+ *    错误代码的准确信息 和 源代码的错误位置
+ *
+ * inline-source-map: 内联，
+ *    只生成一个内联的source-map
+ *    错误代码的准确信息 和 源代码的错误位置
+ *
+ * hideden-source-map: 外部
+ *   提示错错误代码的错误原因，但是没有错误位置，不能追踪到源代码的错误，只能提示到构建后代码的位置
+ *
+ * eval-source-map: 内联，
+ *    每个文件后边sourceMppingUrl，生成对应的sorce-map，都在eval
+ *    错误代码的准确信息 和 源代码的错误位置，只不过文件名字后边多了hash值
+ *
+ * nosources-source-map: 外部
+ *    能找到错误代码的准确错误信息，但是没有任何源代码的信息
+ *
+ * cheap-source-map: 外部
+ *    错误代码的准确信息 和 源代码的错误位置，但是不能提示到具体报错的行，不能详细到列信息
+ *
+ * cheap-module-source-map: 外部
+ *    能找到错误代码的准确错误信息，但是没有任何源代码的信息
+ *    module会将loader的source-map 加入
+ *
+ * 内联和外联的区别：
+ *  1、外联生成了文件，内联没有；
+ *  2、内链构建速度更快
+ *
+ * 开发环境：速度快，调试友好
+ *  速度快： eval > inline > cheap > ...
+ *    eval-cheap-source-map
+ *    eval-source-map
+ *  调试友好
+ *    source-map
+ *    cheap-module-source-map
+ *    cheap-module-source-map
+ *
+ *  eval-source-map > eval-cheap-module-source-map
+ *
+ * 生产环境：源代码要不要隐藏？调试要不要更友好
+ *    内联会让代码体积变大，所以在生产环境不用内联
+ *    nosource-source-map 全部隐藏
+ *    hidden-source-map  只隐藏源代码，会提示构建后代码错误信息
+ *
+ *  eval-source-map > eval-cheap-module-source-map
+ */
